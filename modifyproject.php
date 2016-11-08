@@ -1,6 +1,6 @@
 <?php include 'includes/header.php'; include 'includes/nav.php'; ?>
 <?php
-  $sql = "SELECT `project_id`, `project_name`, `client_name`, `contact_number`, `status`, `deadline` FROM `tbl_project`";
+  $sql = "SELECT * FROM `tbl_project`";
   $result = mysqli_query($con,$sql);
  ?>
   <div class="container">
@@ -16,14 +16,15 @@
             <input type="text" name="search_table" id="search_table" placeholder="Search by Project Name" class="form-control" />
           </div>
         </div>
-        <table class="table table-bordered" id="searchtable"">
+        <table class="table table-bordered" id="searchtable">
           <thead>
             <th>Project Name</th>
             <th>Client Name</th>
             <th>Contact</th>
             <th>Status</th>
-            <th>Deadline</th>
-            <th width="30%">Action</th>
+            <th>Follow Up Date</th>
+            <th>Meeting Date</th>
+            <th width="20%">Action</th>
           </thead>
           <tbody>
             <?php while($row = mysqli_fetch_object($result)): ?>
@@ -32,11 +33,12 @@
                 <td><?= $row->client_name ?></td>
                 <td><?= $row->contact_number ?></td>
                 <td><?= $row->status ?></td>
-                <td><?= $row->deadline ?></td>
+                <td><?= $row->follow_up_date ?></td>
+                <td><?= $row->meeting_date ?></td>
                 <td>
                   <div class="btn-group">
-                    <a href="" class="btn btn-primary"><i class="fa fa-pencil"></i> Edit</a>
-                    <button href="" class="btn btn-success" onclick="detailsmodal(<?= $row->project_id ?>)"><i class="fa fa-eye"></i> View Details</button>
+                    <a href="editproject.php?id=<?= $row->project_id ?>" class="btn btn-primary"><i class="fa fa-pencil"></i> Edit</a>
+                    <a href="showproject.php?id=<?= $row->project_id ?>" class="btn btn-success"><i class="fa fa-eye"></i> Details</a>
                   </div>
                 </td>
               </tr>

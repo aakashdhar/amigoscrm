@@ -75,14 +75,14 @@
               <label for="followupdate">Follow Up Date:</label>
               <div class="input-group">
                 <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-                <input type="date" class="form-control" id="followupdate" name="followupdate">
+                <input type="date" class="form-control" id="followupdate" name="followupdate" min="<?= date("Y-m-d") ?>">
               </div>
             </div>
             <div class="form-group col-md-6">
               <label for="meetingdate">Meeting Date:</label>
               <div class="input-group">
                 <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-                <input type="date" class="form-control" id="meetingdate" name="meetingdate">
+                <input type="date" class="form-control" id="meetingdate" name="meetingdate" min="<?= date("Y-m-d")?>">
               </div>
             </div>
           </div>

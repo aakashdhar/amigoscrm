@@ -33,8 +33,8 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-credit-card" aria-hidden="true"></i>  Payments <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="#">Incoming</a></li>
-            <li><a href="#">Outgoing</a></li>
+            <li><a href="incoming.php">Incoming</a></li>
+            <li><a href="outgoing.php">Outgoing</a></li>
           </ul>
         </li>
         <li class="dropdown">

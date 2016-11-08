@@ -9,13 +9,9 @@
     $source = htmlentities($_POST['source'],ENT_QUOTES,"UTF-8");;
     $status = htmlentities($_POST['status'],ENT_QUOTES,"UTF-8");;
     $quote = htmlentities($_POST['quote'],ENT_QUOTES,"UTF-8");;
-    $paid = htmlentities($_POST['paid'],ENT_QUOTES,"UTF-8");;
-    $balance = htmlentities($_POST['balance'],ENT_QUOTES,"UTF-8");;
-    $due = htmlentities($_POST['due'],ENT_QUOTES,"UTF-8");;
-    $date = htmlentities($_POST['date'],ENT_QUOTES,"UTF-8");;
+    $client_expection = htmlentities($_POST['paid'],ENT_QUOTES,"UTF-8");;
     $followupdate = htmlentities($_POST['followupdate'],ENT_QUOTES,"UTF-8");;
     $meetingdate = htmlentities($_POST['meetingdate'],ENT_QUOTES,"UTF-8");;
-    $deadline = htmlentities($_POST['deadline'],ENT_QUOTES,"UTF-8");;
     $requirements = htmlentities($_POST['requirements'],ENT_QUOTES,"UTF-8");;
     $comments = htmlentities($_POST['comments'],ENT_QUOTES,"UTF-8");;
   }
@@ -25,10 +21,9 @@
   $formatted_meetingdate = date("Y-m-d", strtotime($meetingdate));
   $formatted_deadline = date("Y-m-d", strtotime($deadline));
 
-  $sql = "INSERT INTO `project`(`project_name`, `client_name`, `contact_number`, `source`, `status`, `quote`, `paid`,
-          `balance`, `due`, `date`, `follow_up_date`, `meeting_date`, `deadline`, `requirements`, `comments`) VALUES
-          ('$name','$clientname','$contact','$source','$status','$quote','$paid','$balance','$due','$formated_date',
-          '$formatted_followupdate','$formatted_meetingdate','$formatted_deadline','$requirements','$comments')";
+  $sql = "INSERT INTO `tbl_project`(`project_name`, `client_name`, `contact_number`, `source`, `status`, `quote`, `client_expection`,
+         `follow_up_date`, `meeting_date`, `requirements`, `comments`)
+          VALUES ('$name','$clientname','$contact','$source','$status','$quote','$client_expection','$followupdate','$meetingdate','$requirements','$comments')";
   $result = mysqli_query($con,$sql);
 
 
