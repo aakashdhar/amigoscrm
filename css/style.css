@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,500,700');
+body{
+  background-color: #34495e;
+  font-family: 'Roboto', sans-serif;
+  color: #ecf0f1;
+}
+.navbar {
+     border-radius: 0;
+}
+.navbar-brand {
+    float: left;
+    height: 50px;
+    padding: 15px 15px;
+    font-size: 30px;
+    line-height: 20px;
+    font-weight: 700;
+}
+.background{
+  padding: 8px 20px;
+ background-color:rgba(0, 0, 0, 0.8);;
+ height: 740px;
+ box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
