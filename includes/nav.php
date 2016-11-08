@@ -43,6 +43,7 @@
             <li><a href="addsource.php">Add Source</a></li>
             <li><a href="addstatus.php">Add Status</a></li>
             <li><a href="addaccount.php">Add Bank Account</a></li>
+            <li><a href="addexpensetype.php">Add Expense Type</a></li>
             <li><a href="addtype.php">Add Type</a></li>
           </ul>
         </li>

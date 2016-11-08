@@ -6,6 +6,8 @@
   $sql1 = "SELECT * FROM `tbl_source`";
   $result1 = mysqli_query($con,$sql1);
 
+  $sql2 = "SELECT * FROM `tbl_type`";
+  $result2 = mysqli_query($con,$sql2);
  ?>
 <div class="container">
   <div class="row">
@@ -19,18 +21,18 @@
             <h4 style="color : #f1c40f;">Basic Project Details</h4>
           </div>
           <div class="form-group col-md-6">
-            <label for="name">Project Name:</label>
+            <label for="name">Project Name:</label><span id="result"></span>
             <input type="text" class="form-control" id="name" name="name" placeholder="Enter the Project Name">
           </div>
           <div class="form-group col-md-6">
             <label for="client">Client Name</label>
             <input type="text" class="form-control" id="client" name="client" placeholder="Enter the Client Name">
           </div>
-          <div class="form-group col-md-4">
+          <div class="form-group col-md-3">
             <label for="contact">Contact Number:</label>
             <input type="text" class="form-control" id="contact" name="contact" placeholder="Enter the Contact Number">
           </div>
-          <div class="form-group col-md-4">
+          <div class="form-group col-md-3">
             <label for="contact">Source:</label>
             <select class="form-control" name="source">
               <option>Select option</option>
@@ -39,12 +41,22 @@
               <?php endwhile; ?>
             </select>
           </div>
-          <div class="form-group col-md-4">
+          <div class="form-group col-md-3">
             <label for="contact">Status:</label>
             <select class="form-control" name="status">
               <option>Select Status</option>
               <?php while($row1 = mysqli_fetch_object($result)): ?>
                 <option value="<?= $row1->status_name?>"><?= $row1->status_name ?></option>
+              <?php endwhile; ?>
+            </select>
+          </div>
+          <div class="form-group col-md-3">
+            <label for="contact">Project Type:</label>
+            <select class="form-control" name="type">
+              <option>Select option</option>
+              <?php while($row2 = mysqli_fetch_object($result2)): ?>
+                <?= $row2->type_name ?>
+                <option value="<?= $row2->type_name ?>"><?= $row2->type_name ?></option>
               <?php endwhile; ?>
             </select>
           </div>
@@ -56,7 +68,7 @@
               <label for="quote">Quote:</label>
               <div class="input-group">
                 <div class="input-group-addon"><i class="fa fa-rupee"></i></div>
-                  <input type="text" class="form-control" id="quote" name="quote" placeholder="Enter quoted Amount">
+                  <input type="text" pattern= "[0-9] {3}" class="form-control" id="quote" name="quote" placeholder="Enter quoted Amount">
               </div>
             </div>
             <div class="form-group col-md-6">
@@ -85,6 +97,17 @@
                 <input type="date" class="form-control" id="meetingdate" name="meetingdate" min="<?= date("Y-m-d")?>">
               </div>
             </div>
+          </div>
+          <div class="page-header">
+            <h4 style="color : #f1c40f;">Outsourcing Details</h4>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="outsourced">Outsourced To:</label>
+            <input type="text" class="form-control" id="outsourced" name="outsourced" placeholder="Enter Outsourced To">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="outsourcedamt">Outsourced Amount:</label>
+            <input type="text" class="form-control" id="outsourcedamt" name="outsourcedamt" placeholder="Enter Outsourced amount">
           </div>
           <div class="page-header">
             <br><br>

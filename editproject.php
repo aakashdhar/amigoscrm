@@ -58,7 +58,7 @@
           </div>
           <div class="form-group col-md-3">
             <label for="type">Project Type:</label>
-            <select class="form-control" name="status">
+            <select class="form-control" name="type">
               <option>Select Type</option>
               <option value="<?= $row_edit -> project_type ?>"></option>
               <?php while($row2 = mysqli_fetch_object($result2)): ?>
@@ -93,7 +93,7 @@
                 value="<?= (($row_edit -> finalized_amount == 0)? '' : $row_edit -> finalized_amount )?>">
             </div>
           </div>
-          <div class="form-group col-md-3">
+          <div class="form-group col-md-2">
             <label for="amtpaid">Amount Paid:</label>
             <div class="input-group">
               <div class="input-group-addon"><i class="fa fa-rupee"></i></div>
@@ -101,7 +101,15 @@
                 value="<?= (($row_edit -> amt_paid == 0)? '' : $row_edit -> amt_paid )?>">
             </div>
           </div>
-          <div class="form-group col-md-3">
+          <div class="form-group col-md-2">
+            <label for="amtblnc">Amount Balance:</label>
+            <div class="input-group">
+              <div class="input-group-addon"><i class="fa fa-rupee"></i></div>
+                <input type="text" class="form-control" id="amtblnc" name="amtblnc" placeholder="Enter Due Amount"
+                value="<?= (($row_edit -> amt_due == 0)? '' : $row_edit -> amt_blnc )?>">
+            </div>
+          </div>
+          <div class="form-group col-md-2">
             <label for="amtpaid">Amount Due:</label>
             <div class="input-group">
               <div class="input-group-addon"><i class="fa fa-rupee"></i></div>
@@ -157,6 +165,7 @@
             <textarea class="form-control" id="comments" name="comments" rows="8" cols="40" placeholder="Enter comments"><?= $row_edit -> comments ?></textarea>
           </div>
           <div class="form-group col-md-8 col-md-offset-2">
+            <input type="hidden" name="id" value="<?= $row_edit -> project_id ?>">
             <input type="Submit" class="form-control btn btn-success" id="edit" name="edit" value="Edit Client Details">
           </div>
         </form>
