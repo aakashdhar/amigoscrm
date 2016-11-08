@@ -42,7 +42,7 @@
           <ul class="dropdown-menu">
             <li><a href="addsource.php">Add Source</a></li>
             <li><a href="addstatus.php">Add Status</a></li>
-            <li><a href="addaccount.php">Add Account</a></li>
+            <li><a href="addaccount.php">Add Bank Account</a></li>
             <li><a href="addtype.php">Add Type</a></li>
           </ul>
         </li>
