@@ -68,7 +68,7 @@
               <label for="quote">Quote:</label>
               <div class="input-group">
                 <div class="input-group-addon"><i class="fa fa-rupee"></i></div>
-                  <input type="text" pattern= "[0-9] {3}" class="form-control" id="quote" name="quote" placeholder="Enter quoted Amount">
+                  <input type="text" class="form-control" id="quote" name="quote" placeholder="Enter quoted Amount">
               </div>
             </div>
             <div class="form-group col-md-6">

@@ -42,7 +42,7 @@
             <select class="form-control" name="source">
               <option>Select option</option>
               <?php while($row = mysqli_fetch_object($result1)): ?>
-                <option value="<?= $row->source_name ?>"><?= $row->source_name ?></option>
+                <option value="<?= $row -> source_name ?>"<?= (($row_edit -> source == $row -> source_name)?' selected':'');?>><?= $row -> source_name ?></option>
               <?php endwhile; ?>
             </select>
           </div>
@@ -51,7 +51,7 @@
             <select class="form-control" name="status">
               <option>Select Status</option>
               <?php while($row1 = mysqli_fetch_object($result)): ?>
-                <option value="<?= $row1->status_name?>"><?= $row1->status_name ?></option>
+                <option value="<?= $row1->status_name?>"<?= (($row_edit -> status == $row1 -> status_name)?' selected':'');?> ><?= $row1->status_name ?></option>
               <?php endwhile; ?>
             </select>
           </div>
@@ -60,7 +60,7 @@
             <select class="form-control" name="types">
               <option value ="">Select Type</option>
               <?php while($row2 = mysqli_fetch_object($result2)): ?>
-                <option value="<?= $row2 -> type_name?>"><?= $row2 -> type_name ?></option>
+                <option value="<?= $row2 -> type_name?>"<?= (($row_edit -> project_type == $row2 -> type_name)?' selected':'');?>  ><?= $row2 -> type_name ?></option>
               <?php endwhile; ?>
             </select>
           </div>
