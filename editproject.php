@@ -123,38 +123,103 @@
           <div class="page-header">
             <h4 style="color : #f1c40f;">Dates</h4>
           </div>
-          <div class="form-group col-md-3">
-            <label for="followupdate">Follow Up Date:</label>
-            <div class="input-group">
-              <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-              <input type="date" class="form-control" id="followupdate" name="followupdate"
-                value="<?= (($row_edit -> follow_up_date == '0000-00-00')? '' : $row_edit -> follow_up_date)?>" min="<?= date("Y-m-d")?>">
+          <!-- checking to validate that the followup is mandatorry  -->
+          <?php if($row_edit -> status == 'Followup'): ?>
+            <div class="form-group col-md-3">
+              <label for="followupdate">Follow Up Date:</label>
+              <div class="input-group">
+                <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                <input type="date" class="form-control" id="followupdate" name="followupdate"
+                  value="<?= (($row_edit -> follow_up_date == '0000-00-00')? '' : $row_edit -> follow_up_date)?>" min="<?= date("Y-m-d")?>" required="true">
+              </div>
             </div>
-          </div>
-          <div class="form-group col-md-3">
-            <label for="meetingdate">Meeting Date:</label>
-            <div class="input-group">
-              <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-              <input type="date" class="form-control" id="meetingdate" name="meetingdate"
-              value="<?= (($row_edit -> meeting_date == '0000-00-00')? '' : $row_edit -> meeting_date) ?>" min="<?= date("Y-m-d")?>">
+            <?php else: ?>
+              <div class="form-group col-md-3">
+                <label for="followupdate">Follow Up Date:</label>
+                <div class="input-group">
+                  <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                  <input type="date" class="form-control" id="followupdate" name="followupdate"
+                    value="<?= (($row_edit -> follow_up_date == '0000-00-00')? '' : $row_edit -> follow_up_date)?>" min="<?= date("Y-m-d")?>">
+                </div>
+              </div>
+          <?php endif; ?>
+          <!-- end checking to validate that the followup is mandatorry  -->
+          <!-- checking to validate that the tomeet is mandatorry -->
+          <?php if ($row_edit -> status == 'To Meet'): ?>
+            <div class="form-group col-md-3">
+              <label for="meetingdate">Meeting Date:</label>
+              <div class="input-group">
+                <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                <input type="date" class="form-control" id="meetingdate" name="meetingdate"
+                value="<?= (($row_edit -> meeting_date == '0000-00-00')? '' : $row_edit -> meeting_date) ?>" min="<?= date("Y-m-d")?>" required="true">
+              </div>
             </div>
-          </div>
-          <div class="form-group col-md-3">
-            <label for="meetingdate">Start Date:</label>
-            <div class="input-group">
-              <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-              <input type="date" class="form-control" id="startdate" name="startdate"
-                value="<?= (($row_edit -> start_date == '0000-00-00')? '' : $row_edit -> start_date) ?>">
-            </div>
-          </div>
-          <div class="form-group col-md-3">
-            <label for="meetingdate">Deadline:</label>
-            <div class="input-group">
-              <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-              <input type="date" class="form-control" id="deadline" name="deadline"
-                value="<?= (($row_edit -> deadline == '0000-00-00')? '' : $row_edit -> deadline) ?>" min="<?= date("Y-m-d")?>">
-            </div>
-          </div>
+            <?php else: ?>
+              <div class="form-group col-md-3">
+                <label for="meetingdate">Meeting Date:</label>
+                <div class="input-group">
+                  <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                  <input type="date" class="form-control" id="meetingdate" name="meetingdate"
+                  value="<?= (($row_edit -> meeting_date == '0000-00-00')? '' : $row_edit -> meeting_date) ?>" min="<?= date("Y-m-d")?>">
+                </div>
+              </div>
+          <?php endif; ?>
+          <!-- checking to validate that the tomeet is mandatorry -->
+
+
+            <?php if ($row_edit -> status == 'In Progress' || $row_edit -> status == 'Awaiting Payment' || $row_edit -> status == 'Awaiting Feedback'): ?>
+              <div class="form-group col-md-3">
+                <label for="meetingdate">Start Date:</label>
+                <div class="input-group">
+                  <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                  <input type="date" class="form-control" id="startdate" name="startdate"
+                    value="<?= (($row_edit -> start_date == '0000-00-00')? '' : $row_edit -> start_date) ?>" required="true">
+                </div>
+              </div>
+              <div class="form-group col-md-3">
+                <label for="meetingdate">Deadline:</label>
+                <div class="input-group">
+                  <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                  <input type="date" class="form-control" id="deadline" name="deadline"
+                    value="<?= (($row_edit -> deadline == '0000-00-00')? '' : $row_edit -> deadline) ?>" min="<?= date("Y-m-d")?>" required="true">
+                </div>
+              </div>
+            <?php elseif($row_edit -> status == 'Yet To Start'): ?>
+              <div class="form-group col-md-3">
+                <label for="meetingdate">Start Date:</label>
+                <div class="input-group">
+                  <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                  <input type="date" class="form-control" id="startdate" name="startdate"
+                    value="<?= (($row_edit -> start_date == '0000-00-00')? '' : $row_edit -> start_date) ?>" required="true">
+                </div>
+              </div>
+              <div class="form-group col-md-3">
+                <label for="meetingdate">Deadline:</label>
+                <div class="input-group">
+                  <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                  <input type="date" class="form-control" id="deadline" name="deadline"
+                    value="<?= (($row_edit -> deadline == '0000-00-00')? '' : $row_edit -> deadline) ?>" min="<?= date("Y-m-d")?>">
+                </div>
+              </div>
+            <?php else: ?>
+              <div class="form-group col-md-3">
+                <label for="meetingdate">Start Date:</label>
+                <div class="input-group">
+                  <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                  <input type="date" class="form-control" id="startdate" name="startdate"
+                    value="<?= (($row_edit -> start_date == '0000-00-00')? '' : $row_edit -> start_date) ?>">
+                </div>
+              </div>
+              <div class="form-group col-md-3">
+                <label for="meetingdate">Deadline:</label>
+                <div class="input-group">
+                  <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                  <input type="date" class="form-control" id="deadline" name="deadline"
+                    value="<?= (($row_edit -> deadline == '0000-00-00')? '' : $row_edit -> deadline) ?>" min="<?= date("Y-m-d")?>">
+                </div>
+              </div>
+            <?php endif; ?>
+
           <div class="page-header">
             <br><br>
             <h4 style="color : #f1c40f;">Additional Details</h4>
