@@ -21,7 +21,7 @@
       $requirements =htmlentities($_POST['requirements'],ENT_QUOTES,"UTF-8");
       $comments = htmlentities($_POST['comments'],ENT_QUOTES,"UTF-8");
     }
-  
+
     $formatted_followupdate = date("Y-m-d", strtotime($followupdate));
     $formatted_meetingdate = date("Y-m-d", strtotime($meetingdate));
     $formated_startdate = date("Y-m-d", strtotime($startdate));
@@ -35,7 +35,10 @@
 
     $result = mysqli_query($con,$sql);
 
-    if ($result) {
+    $sql1 = "UPDATE `tbl_payment_incoming` SET `project_paid_amt`= '$amtpaid' WHERE `proj_id` = '$id'";
+    $result1 = mysqli_query($con,$sql1);
+
+    if ($result && $result1) {
       header('Location:modifyproject.php');
     }
 

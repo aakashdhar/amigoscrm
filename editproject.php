@@ -94,17 +94,22 @@
           <div class="form-group col-md-2">
             <label for="amtpaid">Amount Paid:</label>
             <div class="input-group">
+              <?php
+                  $sql_payment = "SELECT `project_paid_amt` FROM `tbl_payment_incoming` WHERE `proj_id` = '$id'";
+                  $resultset = mysqli_query($con,$sql_payment);
+                  $rowset = mysqli_fetch_object($resultset);
+               ?>
               <div class="input-group-addon"><i class="fa fa-rupee"></i></div>
                 <input type="text" class="form-control" id="amtpaid" name="amtpaid" placeholder="Enter Paid Amount"
-                value="<?= (($row_edit -> amt_paid == 0)? '' : $row_edit -> amt_paid )?>">
-            </div>
+                value="<?= $rowset -> project_paid_amt ?>">
+            </div><?= (($row_edit -> amt_due == 0)? '' : $row_edit -> amt_blnc )?>
           </div>
           <div class="form-group col-md-2">
             <label for="amtblnc">Amount Balance:</label>
             <div class="input-group">
               <div class="input-group-addon"><i class="fa fa-rupee"></i></div>
                 <input type="text" class="form-control" id="amtblnc" name="amtblnc" placeholder="Enter Due Amount"
-                value="<?= (($row_edit -> amt_due == 0)? '' : $row_edit -> amt_blnc )?>">
+                value="<?= $row_edit -> finalized_amount - $rowset -> project_paid_amt?>">
             </div>
           </div>
           <div class="form-group col-md-2">
