@@ -12,28 +12,7 @@
           $(this).show();
         });
       });
-
-      $("#name").keyup(function()
-      {
-        var name = $(this).val();
-        if(name.length > 2)
-        {
-          $("#result").html('checking...');
-          $.ajax({
-            type : 'POST',
-            url  : 'project-name.php',
-            data : $(this).serialize(),
-            success : function(data){
-                   $("#result").html(data);
-                }
-            });
-            return false;
-        }
-        else
-        {
-          $("#result").html('');
-        }
-      });
    });
+   </script>
 </body>
 </html>

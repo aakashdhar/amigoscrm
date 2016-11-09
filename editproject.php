@@ -49,7 +49,6 @@
           <div class="form-group col-md-3">
             <label for="status">Status:</label>
             <select class="form-control" name="status">
-              <option value="<?= $row_edit -> status ?>"><?= $row_edit -> status ?></option>
               <option>Select Status</option>
               <?php while($row1 = mysqli_fetch_object($result)): ?>
                 <option value="<?= $row1->status_name?>"><?= $row1->status_name ?></option>
@@ -57,12 +56,11 @@
             </select>
           </div>
           <div class="form-group col-md-3">
-            <label for="type">Project Type:</label>
-            <select class="form-control" name="type">
-              <option>Select Type</option>
-              <option value="<?= $row_edit -> project_type ?>"></option>
+            <label for="types">Project Type:</label>
+            <select class="form-control" name="types">
+              <option value ="">Select Type</option>
               <?php while($row2 = mysqli_fetch_object($result2)): ?>
-                <option value="<?= $row1->type_name?>"><?= $row2 ->type_name ?></option>
+                <option value="<?= $row2 -> type_name?>"><?= $row2 -> type_name ?></option>
               <?php endwhile; ?>
             </select>
           </div>

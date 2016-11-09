@@ -5,8 +5,12 @@
       $amount = htmlentities($_POST['amount'],ENT_QUOTES,"UTF-8");
       $paiddate = htmlentities($_POST['paiddate'],ENT_QUOTES,"UTF-8");
       $bankname = htmlentities($_POST['bankname'],ENT_QUOTES,"UTF-8");
-      $sql2 = "INSERT INTO `tbl_payment`(`project_name`, `project_paid_amt`, `paid_date`, `bank_paid_id`)
-                VALUES ('$projectname','$amount','$paiddate','$bankname')";
+
+      $projdetail = explode('#',$projectname);
+
+
+      $sql2 = "INSERT INTO `tbl_payment_incoming`(`project_name`,`proj_id`,`project_paid_amt`, `paid_date`, `bank_paid_id`)
+                VALUES ('$projdetail[0]','$projdetail[1]','$amount','$paiddate','$bankname')";
 
       $result2 = mysqli_query($con,$sql2);
   }
@@ -19,9 +23,9 @@
         <div class="page-header">
           <h1>Incoming Payments</h1>
         </div>
-        <form action="incoming.php" method="post">
+        <form action="incoming.php" method="post" name="myForm"onsubmit="return checkInp()">
           <?php
-            $sql = "SELECT `project_name` FROM `tbl_project`";
+            $sql = "SELECT `project_id`,`project_name` FROM `tbl_project`";
             $result = mysqli_query($con,$sql);
 
             $sql1 =  "SELECT `bank_id`,`bank_name`,`account_number` FROM `tbl_bank`";
@@ -32,7 +36,7 @@
             <select class="form-control" id="projectname" name="projectname">
               <option value="">Select Project</option>
               <?php while($row = mysqli_fetch_object($result)): ?>
-                <option value="<?= $row-> project_name ?>"><?= $row-> project_name ?></option>
+                <option value="<?= $row-> project_name ?>#<?= $row-> project_id ?>"><?= $row-> project_name ?></option>
               <?php endwhile; ?>
             </select>
           </div>
@@ -56,6 +60,10 @@
               <?php endwhile; ?>
             </select>
           </div>
+          <div class="form-group col-md-12">
+            <label for="comments">Additional Comments:</label>
+            <textarea id="comments" name="comments" rows="4" cols="40" class="form-control"></textarea>
+          </div>
           <div class="form-group col-md-6 col-md-offset-3">
             <input type="submit" class="form-control btn btn-success" id="submit" name="submit" value="Submit Incoming Payment Detail">
           </div>
@@ -63,5 +71,4 @@
       </div>
     </div>
   </div>
-
 <?php include 'includes/footer.php'; ?>

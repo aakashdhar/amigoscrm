@@ -8,7 +8,7 @@
       $contact =htmlentities($_POST['contact'],ENT_QUOTES,"UTF-8");
       $source =htmlentities($_POST['source'],ENT_QUOTES,"UTF-8");
       $status =htmlentities($_POST['status'],ENT_QUOTES,"UTF-8");
-      $type =htmlentities($_POST['type'],ENT_QUOTES,"UTF-8");
+      $types =htmlentities($_POST['types'],ENT_QUOTES,"UTF-8");
       $quote =htmlentities($_POST['quote'],ENT_QUOTES,"UTF-8");
       $paid =htmlentities($_POST['paid'],ENT_QUOTES,"UTF-8");
       $finalpaid =htmlentities($_POST['finalpaid'],ENT_QUOTES,"UTF-8");
@@ -21,7 +21,7 @@
       $requirements =htmlentities($_POST['requirements'],ENT_QUOTES,"UTF-8");
       $comments = htmlentities($_POST['comments'],ENT_QUOTES,"UTF-8");
     }
-
+  
     $formatted_followupdate = date("Y-m-d", strtotime($followupdate));
     $formatted_meetingdate = date("Y-m-d", strtotime($meetingdate));
     $formated_startdate = date("Y-m-d", strtotime($startdate));
@@ -29,8 +29,9 @@
 
     $sql = "UPDATE `tbl_project` SET `project_name`='$name',`client_name`='$client',`contact_number`='$contact',`source`='$source',`status`='$status',`quote`='$quote',
     `client_expection`='$paid',`finalized_amount`='$finalpaid',`amt_paid`='$amtpaid',`amt_due`='$amtdue',`follow_up_date`='$formatted_followupdate',
-    `meeting_date`='$formatted_meetingdate',`start_date`='$formated_startdate',`deadline`='$formatted_deadline',`project_type`='$type',`requirements`='$requirements',
+    `meeting_date`='$formatted_meetingdate',`start_date`='$formated_startdate',`deadline`='$formatted_deadline',`project_type`='$types',`requirements`='$requirements',
     `comments`='$comments' WHERE `project_id` = '$id'";
+
 
     $result = mysqli_query($con,$sql);
 
