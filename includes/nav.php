@@ -23,11 +23,8 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-flag-o" aria-hidden="true"></i>  Follow Up <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">Separated link</a></li>
+            <li><a href="pendingfollowup.php">Pending Followups</a></li>
+            <li><a href="projectfollowup.php">Project Followup</a></li>
           </ul>
         </li>
         <li class="dropdown">

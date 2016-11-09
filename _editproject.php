@@ -26,11 +26,13 @@
     $formatted_meetingdate = date("Y-m-d", strtotime($meetingdate));
     $formated_startdate = date("Y-m-d", strtotime($startdate));
     $formatted_deadline = date("Y-m-d", strtotime($deadline));
-
+    if ($type == 'Completed') {
+      $proj_start = 1;
+    }
     $sql = "UPDATE `tbl_project` SET `project_name`='$name',`client_name`='$client',`contact_number`='$contact',`source`='$source',`status`='$status',`quote`='$quote',
     `client_expection`='$paid',`finalized_amount`='$finalpaid',`amt_paid`='$amtpaid',`amt_due`='$amtdue',`follow_up_date`='$formatted_followupdate',
     `meeting_date`='$formatted_meetingdate',`start_date`='$formated_startdate',`deadline`='$formatted_deadline',`project_type`='$types',`requirements`='$requirements',
-    `comments`='$comments' WHERE `project_id` = '$id'";
+    `comments`='$comments',`proj_start`= '$proj_start' WHERE `project_id` = '$id'";
 
 
     $result = mysqli_query($con,$sql);
