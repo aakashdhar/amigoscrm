@@ -20,6 +20,7 @@
         <li><a href="modifyproject.php">Modify Project</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
+        <li><a href="projection.php"><i class="fa fa-product-hunt"></i>  Projection</a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-flag-o" aria-hidden="true"></i>  Follow Up <span class="caret"></span></a>
           <ul class="dropdown-menu">

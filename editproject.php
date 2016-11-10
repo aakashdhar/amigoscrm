@@ -101,7 +101,7 @@
                ?>
               <div class="input-group-addon"><i class="fa fa-rupee"></i></div>
                 <input type="text" class="form-control" id="amtpaid" name="amtpaid" placeholder="Enter Paid Amount"
-                value="<?= $rowset -> project_paid_amt ?>">
+                value="<?= $rowset -> project_paid_amt ?>" disabled="true">
             </div><?= (($row_edit -> amt_due == 0)? '' : $row_edit -> amt_blnc )?>
           </div>
           <div class="form-group col-md-2">
@@ -109,7 +109,7 @@
             <div class="input-group">
               <div class="input-group-addon"><i class="fa fa-rupee"></i></div>
                 <input type="text" class="form-control" id="amtblnc" name="amtblnc" placeholder="Enter Due Amount"
-                value="<?= $row_edit -> finalized_amount - $rowset -> project_paid_amt?>">
+                value="<?= $row_edit -> finalized_amount - $rowset -> project_paid_amt?>" disabled="true">
             </div>
           </div>
           <div class="form-group col-md-2">
