@@ -5,6 +5,24 @@
   }
 </style>
 <?php
+  $month = $_REQUEST['month'];
+
+  // for getting the summation of all websites
+  $sql2 = "SELECT SUM(`finalized_amount`), COUNT(`finalized_amount`) from `tbl_project` WHERE `project_type` = 'Website' and MONTH(`start_date`) = '$month'";
+  $resultset = mysqli_query($con,$sql2);
+  $row = mysqli_fetch_row($resultset);
+  $actual_website_total = $row[0];
+  $actual_website_achived = $row[1];
+
+  // for getting the summation of all mobile
+  $sql3 = "SELECT SUM(`finalized_amount`), COUNT(`finalized_amount`) from `tbl_project` WHERE `project_type` = 'Mobile' and MONTH(`start_date`) = '$month'";
+  $resultsets = mysqli_query($con,$sql3);
+  $rows = mysqli_fetch_row($resultsets);
+  $actual_mobile_total = $rows[0];
+  $actual_mobile_achived = $rows[1];
+
+  $achived_overall_total =   $actual_mobile_total + $actual_website_total;
+
   $date = date('F Y');
   $pricing = array();
   $sql = "SELECT `project_price` FROM `tbl_price`";
@@ -37,9 +55,19 @@
  ?>
 <div class="container">
   <div class="row">
+    <form class="" action="projection.php" method="post">
+      <div class="form-group col-md-2 pull-right">
+        <select id="month_select" name="month_select" class="form-control">
+          <option value="">Select Month</option>
+          <option value="<?= date("m");?>"><?= date("F")?></option>
+          <option value="<?= date("m",strtotime("-1 Months"))?>"><?= date("F",strtotime("-1 Months"))?></option>
+          <option value="<?= date("m",strtotime("-2 Months"))?>"><?= date("F",strtotime("-2 Months"))?></option>
+        </select>
+      </div>
+    </form>
     <div class="col-md-10 col-md-offset-1">
       <div class="page-header">
-        <h1>Projections</h1>
+        <h1>Projections for the month of <?= date('F') ?></h1>
       </div>
       <div>
         <!-- Tab menu -->
@@ -111,7 +139,7 @@
                     </div>
                     <div class="form-group col-md-6">
                       <label>Achived Mobile Projects</label>
-                      <label class="form-control text-center"><?= number_format() ?></label>
+                      <label class="form-control text-center"><?= number_format($actual_mobile_achived) ?></label>
                     </div>
                     <div class="form-group col-md-6">
                       <label>Target amount from Mobile Project</label>
@@ -119,7 +147,7 @@
                     </div>
                     <div class="form-group col-md-6">
                       <label>Achived amount from Mobile Projects</label>
-                      <label class="form-control text-center"><?= number_format() ?></label>
+                      <label class="form-control text-center"><?= number_format($actual_mobile_total) ?></label>
                     </div>
                   </div>
                   <div class="col-md-6">
@@ -130,7 +158,7 @@
                     </div>
                     <div class="form-group col-md-6">
                       <label>Achived web Projects</label>
-                      <label class="form-control text-center"><?= number_format() ?></label>
+                      <label class="form-control text-center"><?= number_format($actual_website_achived) ?></label>
                     </div>
                     <div class="form-group col-md-6">
                       <label>Target amount from Website Project</label>
@@ -138,7 +166,7 @@
                     </div>
                     <div class="form-group col-md-6">
                       <label>Achived amount from Website Projects</label>
-                      <label class="form-control text-center"><?= number_format() ?></label>
+                      <label class="form-control text-center"><?= number_format($actual_website_total) ?></label>
                     </div>
                   </div>
                   <div class="page-header">
@@ -149,12 +177,12 @@
                     <label class="form-control text-center"><?= number_format($row1 -> overall_total) ?></label>
                   </div>
                   <div class="form-group col-md-6">
-                    <label>Achived overall Toatal</label>
-                    <label class="form-control text-center"><?= number_format() ?></label>
+                    <label>Achived overall Total</label>
+                    <label class="form-control text-center"><?= number_format($achived_overall_total) ?></label>
                   </div>
                   <div class="form-group col-md-6 col-md-offset-3">
                     <label>Overall Difference</label>
-                    <label class="form-control text-center"><?= number_format() ?></label>
+                    <label class="form-control text-center"><?= number_format($row1 -> overall_total - $achived_overall_total) ?></label>
                   </div>
                 <?php endwhile; ?>
               </div>

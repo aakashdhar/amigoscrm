@@ -12,7 +12,25 @@
           $(this).show();
         });
       });
-   });
+
+      $("#month_select").change(function(){
+         var selected_month=$(this).val();
+         sendType(selected_month);
+           });
+    });
+    function sendType(type)
+    {
+        $.ajax({
+        type:"GET",
+        url:"projection.php",
+        data:({month:type}),
+        success:function(success)
+        {
+           location.href="projection.php?month="+type;
+        }
+    });
+  }
+
    </script>
 </body>
 </html>
