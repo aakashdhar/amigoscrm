@@ -17,18 +17,41 @@
     header('location:addstatus.php');
   }
 
-  if (isset($_POST['addstatus'])) {
+  if (isset($_POST['addstatus']) && !empty($_POST['source'])) {
     $source = htmlentities($_POST['source'],ENT_QUOTES,"UTF-8");
     $source = ucwords($source);
-    $sql = "INSERT INTO `tbl_status`(`status_name`) VALUES ('$source')";
-    $result = mysqli_query($con,$sql);
-    header('location:addstatus.php');
+    $sql_check = "SELECT * FROM `tbl_status` WHERE `status_name` = '$source'";
+    $result_check = mysqli_query($con,$sql_check);
+    if (mysqli_num_rows($result_check) > 0) {
+      echo "<div class='alert alert-danger alert-dismissible col-md-6 col-md-offset-3 text-center' role='alert'>
+        <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
+        <strong>Warning!</strong> Name Already Exists.
+      </div>";
+    } else {
+      $sql = "INSERT INTO `tbl_status`(`status_name`) VALUES ('$source')";
+      $result = mysqli_query($con,$sql);
+      header('location:addstatus.php');
+    }
   }
-  if (isset($_POST['editstatus'])) {
-    $source = htmlentities($_POST['source'],ENT_QUOTES,"UTF-8");
-    $sql_update = "UPDATE `tbl_status` SET `status_name`= '$source' WHERE `status_id`= '$edit_id'";
-    $result_update = mysqli_query($con,$sql_update);
-    header('location:addstatus.php');
+
+  if (isset($_POST['editstatus']) && !empty($_POST['source'])) {
+      $source = htmlentities($_POST['source'],ENT_QUOTES,"UTF-8");
+      $source = ucwords($source);
+      $sql = "SELECT * FROM `tbl_status` WHERE `status_name` = '$source' AND `status_id` != '$edit_id'";
+      $result = mysqli_query($con,$sql);
+      $count = mysqli_num_rows($result);
+      if ($count > 0) {
+        echo "<div class='alert alert-danger alert-dismissible col-md-6 col-md-offset-3 text-center' role='alert'>
+          <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
+          <strong>Warning!</strong> Name Already Exists.
+        </div>";
+      } else {
+        $source = htmlentities($_POST['source'],ENT_QUOTES,"UTF-8");
+        $sql_update = "UPDATE `tbl_status` SET `status_name`= '$source' WHERE `status_id`= '$edit_id'";
+        $result_update = mysqli_query($con,$sql_update);
+        header('location:addstatus.php');
+      }
+
   }
 
 

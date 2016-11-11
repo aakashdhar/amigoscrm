@@ -1,13 +1,13 @@
 <?php include 'includes/header.php'; include 'includes/nav.php'; ?>
 <?php
-  $sql = "SELECT * FROM `tbl_project` WHERE `status` LIKE '%Followup%' OR `status` LIKE '%To Meet%'";
+  $sql = "SELECT * FROM `tbl_project` WHERE `status` = 'Pending Calls'";
   $result = mysqli_query($con,$sql);
  ?>
   <div class="container">
     <div class="row">
       <div class="col-md-12">
         <div class="page-header">
-          <h1>Project Followup</h1>
+          <h1>Pending Followups</h1>
         </div>
         <div class="form-group col-md-6 col-md-offset-3">
           <label for="search_table" class="control-label">Search Projects</label>

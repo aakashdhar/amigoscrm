@@ -13,6 +13,7 @@
   $sql3 = "SELECT * FROM `tbl_project` WHERE `project_id` = '$id'";
   $result3 = mysqli_query($con,$sql3);
   $row_edit = mysqli_fetch_object($result3)
+
 ?>
 <div class="container">
   <div class="row">
@@ -23,7 +24,7 @@
       <div class="background">
         <form class="" action="_editproject.php" method="post" role="form">
           <div class="page-header">
-            <h4 style="color : #f1c40f;">Basic Project Details</h4>
+            <h4 style="color : #f1c40f;">Basic Project Details<?= $row_edit -> amt_paid ?></h4>
           </div>
           <div class="form-group col-md-6">
             <label for="name">Project Name:</label>
@@ -94,22 +95,17 @@
           <div class="form-group col-md-2">
             <label for="amtpaid">Amount Paid:</label>
             <div class="input-group">
-              <?php
-                  $sql_payment = "SELECT `project_paid_amt` FROM `tbl_payment_incoming` WHERE `proj_id` = '$id'";
-                  $resultset = mysqli_query($con,$sql_payment);
-                  $rowset = mysqli_fetch_object($resultset);
-               ?>
               <div class="input-group-addon"><i class="fa fa-rupee"></i></div>
                 <input type="text" class="form-control" id="amtpaid" name="amtpaid" placeholder="Enter Paid Amount"
-                value="<?= $rowset -> project_paid_amt ?>" disabled="true">
-            </div><?= (($row_edit -> amt_due == 0)? '' : $row_edit -> amt_blnc )?>
+                value="<?= $row_edit -> amt_paid ?>" disabled="true">
+            </div>
           </div>
           <div class="form-group col-md-2">
             <label for="amtblnc">Amount Balance:</label>
             <div class="input-group">
               <div class="input-group-addon"><i class="fa fa-rupee"></i></div>
                 <input type="text" class="form-control" id="amtblnc" name="amtblnc" placeholder="Enter Due Amount"
-                value="<?= $row_edit -> finalized_amount - $rowset -> project_paid_amt?>" disabled="true">
+                value="<?= $row_edit -> finalized_amount - $row_edit -> amt_paid ?>" disabled="true">
             </div>
           </div>
           <div class="form-group col-md-2">
@@ -127,19 +123,17 @@
           <?php if($row_edit -> status == 'Followup'): ?>
             <div class="form-group col-md-3">
               <label for="followupdate">Follow Up Date:</label>
-              <div class="input-group">
-                <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-                <input type="date" class="form-control" id="followupdate" name="followupdate"
-                  value="<?= (($row_edit -> follow_up_date == '0000-00-00')? '' : $row_edit -> follow_up_date)?>" min="<?= date("Y-m-d")?>" required="true">
+              <div class="input-append date form_datetime">
+                  <input type="text" value="<?= $row_edit -> follow_up_date ?>" name="followupdate" class="form-control" readonly required>
+                  <span class="add-on"><i class="icon-th"></i></span>
               </div>
             </div>
             <?php else: ?>
               <div class="form-group col-md-3">
                 <label for="followupdate">Follow Up Date:</label>
-                <div class="input-group">
-                  <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-                  <input type="date" class="form-control" id="followupdate" name="followupdate"
-                    value="<?= (($row_edit -> follow_up_date == '0000-00-00')? '' : $row_edit -> follow_up_date)?>" min="<?= date("Y-m-d")?>">
+                <div class="input-append date form_datetime">
+                    <input type="text" value="<?= $row_edit -> follow_up_date ?>" name="followupdate" class="form-control" readonly>
+                    <span class="add-on"><i class="icon-th"></i></span>
                 </div>
               </div>
           <?php endif; ?>
@@ -148,19 +142,17 @@
           <?php if ($row_edit -> status == 'To Meet'): ?>
             <div class="form-group col-md-3">
               <label for="meetingdate">Meeting Date:</label>
-              <div class="input-group">
-                <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-                <input type="date" class="form-control" id="meetingdate" name="meetingdate"
-                value="<?= (($row_edit -> meeting_date == '0000-00-00')? '' : $row_edit -> meeting_date) ?>" min="<?= date("Y-m-d")?>" required="true">
+              <div class="input-append date form_datetime">
+                  <input type="text" value="<?= $row_edit -> meeting_date ?>" name="meetingdate" class="form-control" readonly required>
+                  <span class="add-on"><i class="icon-th"></i></span>
               </div>
             </div>
             <?php else: ?>
               <div class="form-group col-md-3">
                 <label for="meetingdate">Meeting Date:</label>
-                <div class="input-group">
-                  <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-                  <input type="date" class="form-control" id="meetingdate" name="meetingdate"
-                  value="<?= (($row_edit -> meeting_date == '0000-00-00')? '' : $row_edit -> meeting_date) ?>" min="<?= date("Y-m-d")?>">
+                <div class="input-append date form_datetime">
+                    <input type="text" value="<?= $row_edit -> meeting_date ?>" name="meetingdate" class="form-control" readonly>
+                    <span class="add-on"><i class="icon-th"></i></span>
                 </div>
               </div>
           <?php endif; ?>
@@ -233,6 +225,8 @@
             <textarea class="form-control" id="comments" name="comments" rows="8" cols="40" placeholder="Enter comments"><?= $row_edit -> comments ?></textarea>
           </div>
           <div class="form-group col-md-8 col-md-offset-2">
+            <?php $amount_balance = $row_edit -> finalized_amount - $row_edit -> amt_paid ?>
+            <input type="hidden" name="amount_balance" value="<?= $amount_balance ?>">
             <input type="hidden" name="id" value="<?= $row_edit -> project_id ?>">
             <input type="Submit" class="form-control btn btn-success" id="edit" name="edit" value="Edit Client Details">
           </div>

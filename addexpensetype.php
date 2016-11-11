@@ -17,19 +17,40 @@
     $delete_result = mysqli_query($con,$delete_sql);
     header('location:addexpensetype.php');
   }
-  if (isset($_POST['addexpense'])) {
+  if (isset($_POST['addexpense']) && !empty($_POST['expense'])) {
     $expense = htmlentities($_POST['expense'],ENT_QUOTES,"UTF-8");
     $expense = ucwords($expense);
-    $sql = "INSERT INTO `tbl_expensetype`(`expense_name`) VALUES ('$expense')";
-    $result = mysqli_query($con,$sql);
-    header('location:addexpensetype.php');
+    $sql_check = "SELECT * FROM `tbl_expensetype` WHERE `expense_name` = '$expense'";
+    $result_check = mysqli_query($con,$sql_check);
+    if (mysqli_num_rows($result_check) > 0) {
+      echo "<div class='alert alert-danger alert-dismissible col-md-6 col-md-offset-3 text-center' role='alert'>
+        <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
+        <strong>Warning!</strong> Name Already Exists.
+      </div>";
+    } else {
+      $sql = "INSERT INTO `tbl_expensetype`(`expense_name`) VALUES ('$expense')";
+      $result = mysqli_query($con,$sql);
+      header('location:addexpensetype.php');
+    }
   }
+
+
   if (isset($_POST['editexpense'])) {
     $expense = htmlentities($_POST['expense'],ENT_QUOTES,"UTF-8");
     $expense = ucwords($expense);
-    $sql_update = "UPDATE `tbl_expensetype` SET `expense_name`= '$expense' WHERE `expense_id`= '$edit_id'";
-    $result_update = mysqli_query($con,$sql_update);
-    header('location:addexpensetype.php');
+    $sql = "SELECT * FROM `tbl_expensetype` WHERE `expense_name` = '$expense' AND `expense_id` != '$edit_id'";
+    $result = mysqli_query($con,$sql);
+    if (mysqli_num_rows($result) > 0 ) {
+      echo "<div class='alert alert-danger alert-dismissible col-md-6 col-md-offset-3 text-center' role='alert'>
+        <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
+        <strong>Warning!</strong> Name Already Exists.
+      </div>";
+    } else {
+      $sql_update = "UPDATE `tbl_expensetype` SET `expense_name`= '$expense' WHERE `expense_id`= '$edit_id'";
+      $result_update = mysqli_query($con,$sql_update);
+      header('location:addexpensetype.php');
+    }
+
   }
 
 

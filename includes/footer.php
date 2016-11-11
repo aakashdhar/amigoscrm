@@ -1,5 +1,6 @@
   <script src="js/jquery.js" charset="utf-8"></script>
   <script src="js/bootstrap.js" charset="utf-8"></script>
+  <script src="js/bootstrap-datetimepicker.js" charset="utf-8"></script>
   <script>
    $(document).ready(function(){
      $("#search_table").keyup(function(){
@@ -30,7 +31,10 @@
         }
     });
   }
+  $(".form_datetime").datetimepicker({
+      format: "yyyy-mm-dd hh:ii:ss"
+  });
+</script>
 
-   </script>
 </body>
 </html>

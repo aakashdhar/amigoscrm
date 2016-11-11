@@ -5,53 +5,7 @@
   }
 </style>
 <?php
-  $month = $_REQUEST['month'];
 
-  // for getting the summation of all websites
-  $sql2 = "SELECT SUM(`finalized_amount`), COUNT(`finalized_amount`) from `tbl_project` WHERE `project_type` = 'Website' and MONTH(`start_date`) = '$month'";
-  $resultset = mysqli_query($con,$sql2);
-  $row = mysqli_fetch_row($resultset);
-  $actual_website_total = $row[0];
-  $actual_website_achived = $row[1];
-
-  // for getting the summation of all mobile
-  $sql3 = "SELECT SUM(`finalized_amount`), COUNT(`finalized_amount`) from `tbl_project` WHERE `project_type` = 'Mobile' and MONTH(`start_date`) = '$month'";
-  $resultsets = mysqli_query($con,$sql3);
-  $rows = mysqli_fetch_row($resultsets);
-  $actual_mobile_total = $rows[0];
-  $actual_mobile_achived = $rows[1];
-
-  $achived_overall_total =   $actual_mobile_total + $actual_website_total;
-
-  $date = date('F Y');
-  $pricing = array();
-  $sql = "SELECT `project_price` FROM `tbl_price`";
-  $result = mysqli_query($con,$sql);
-  $row = mysqli_fetch_object($result);
-  for($i = 0 ; $i <= count($row); $i++){
-    array_push($pricing,$row->project_price);
-  }
-  if (isset($_POST['submit'])) {
-    $numb_mobile = htmlentities($_POST['mobile'],ENT_QUOTES,"UTF-8");
-    $numb_web = htmlentities($_POST['web'],ENT_QUOTES,"UTF-8");
-    $total_from_mobile_proj = $numb_mobile * $pricing[0];
-    $total_from_web_proj = $numb_web * $pricing[1];
-    $final_total = $total_from_mobile_proj + $total_from_web_proj;
-    $sql_ins = "INSERT INTO `tbl_projection`(`projection_time`, `numb_mobile_proj`, `numb_web_proj`, `mobile_total`, `web_total`, `overall_total`)
-              VALUES ('$date','$numb_mobile','$numb_web','$total_from_mobile_proj','$total_from_web_proj','$final_total')";
-    $result_ins = mysqli_query($con,$sql_ins);
-  }
-  if (isset($_POST['edit'])) {
-    $numb_mobile = htmlentities($_POST['mobile'],ENT_QUOTES,"UTF-8");
-    $numb_web = htmlentities($_POST['web'],ENT_QUOTES,"UTF-8");
-    $total_from_mobile_proj = $numb_mobile * $pricing[0];
-    $total_from_web_proj = $numb_web * $pricing[1];
-    $final_total = $total_from_mobile_proj + $total_from_web_proj;
-    $sql_edit = "UPDATE `tbl_projection` SET `numb_mobile_proj`='$numb_mobile',
-                `numb_web_proj`='$numb_web',`mobile_total`='$total_from_mobile_proj',`web_total`='$total_from_web_proj',`overall_total`='$final_total'
-                WHERE `projection_time` = '$date'";
-    $result_edit = mysqli_query($con,$sql_edit);
-  }
  ?>
 <div class="container">
   <div class="row">
@@ -127,6 +81,7 @@
             <div class="row">
               <div class="row">
                 <?php
+
                     $sql_retrive = "SELECT * FROM `tbl_projection` WHERE `projection_time` = '$date'";
                     $result_retrived = mysqli_query($con,$sql_retrive)
                  ?>

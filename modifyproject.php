@@ -1,6 +1,6 @@
 <?php include 'includes/header.php'; include 'includes/nav.php'; ?>
 <?php
-  $sql = "SELECT * FROM `tbl_project`";
+  $sql = "SELECT * FROM `tbl_project` WHERE `finalized_amount` > 0  AND `status` NOT LIKE '%Completed%'";
   $result = mysqli_query($con,$sql);
  ?>
   <div class="container">

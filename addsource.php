@@ -1,5 +1,6 @@
 <?php include 'includes/header.php'; include 'includes/nav.php';?>
 <?php
+
   if (isset($_GET['edit']) && !empty($_GET['edit'])) {
     $edit_id = (int)$_GET['edit'];
     $edit_id = htmlentities($edit_id,ENT_QUOTES,"UTF-8");
@@ -17,19 +18,44 @@
     header('location:addsource.php');
   }
 
-  if (isset($_POST['addsource'])) {
+  if (isset($_POST['addsource']) && !empty($_POST['source'])) {
     $source = htmlentities($_POST['source'],ENT_QUOTES,"UTF-8");
     $source = ucwords($source);
-    $sql = "INSERT INTO `tbl_source`(`source_name`) VALUES ('$source')";
-    $result = mysqli_query($con,$sql);
-    header('location:addsource.php');
+    $sql_check = "SELECT * FROM `tbl_source` WHERE `source_name` = '$source'";
+    $result_check = mysqli_query($con,$sql_check);
+
+    if (mysqli_num_rows($result_check) > 0) {
+      echo "<div class='alert alert-danger alert-dismissible col-md-6 col-md-offset-3 text-center' role='alert'>
+        <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
+        <strong>Warning!</strong> Name Already Exists.
+      </div>";
+    } else {
+      $sql = "INSERT INTO `tbl_source`(`source_name`) VALUES ('$source')";
+      $result = mysqli_query($con,$sql);
+      header('location:addsource.php');
+    }
   }
-  if (isset($_POST['editsource'])) {
-    $source = htmlentities($_POST['source'],ENT_QUOTES,"UTF-8");
-    $source = ucwords($source);
-    $sql_update = "UPDATE `tbl_source` SET `source_name`= '$source' WHERE `source_id`= '$edit_id'";
-    $result_update = mysqli_query($con,$sql_update);
-    header('location:addsource.php');
+
+  if (isset($_POST['editsource']) && !empty($_POST['source'])) {
+      $source = htmlentities($_POST['source'],ENT_QUOTES,"UTF-8");
+      $source = ucwords($source);
+      $sql = "SELECT * FROM `tbl_source` WHERE `source_name` = '$source' AND `source_id` != '$edit_id'";
+      $result = mysqli_query($con,$sql);
+      $count = mysqli_num_rows($result);
+
+      if ( $count > 0) {
+        echo "<div class='alert alert-danger alert-dismissible col-md-6 col-md-offset-3 text-center' role='alert'>
+          <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
+          <strong>Warning!</strong> Name Already Exists.
+        </div>";
+      }else{
+        $source = htmlentities($_POST['source'],ENT_QUOTES,"UTF-8");
+        $source = ucwords($source);
+        $sql_update = "UPDATE `tbl_source` SET `source_name`= '$source' WHERE `source_id`= '$edit_id'";
+        $result_update = mysqli_query($con,$sql_update);
+        header('location:addsource.php');
+      }
+
   }
 
 
@@ -72,7 +98,7 @@
             <td>
               <div class="btn-group">
                 <a href="addsource.php?edit=<?= $row -> source_id ;?>" class="btn btn-success"><i class="fa fa-pencil"></i>  Edit</a>
-                <a href="addsource.php?delete=<?= $row -> source_id ;?>" class="btn btn-danger"><i class="fa fa-trash"></i>  Delete</a>
+                <a href="addsource.php?delete=<?= $row -> source_id ;?>" class="btn btn-danger" onclick="confirm(Do you Want to delete this record)"><i class="fa fa-trash"></i>  Delete</a>
               </div>
             </td>
           </tr>

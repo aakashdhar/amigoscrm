@@ -1,6 +1,6 @@
 <?php include 'includes/header.php'; include 'includes/nav.php'; ?>
 <?php
-  $sql = "SELECT * FROM `tbl_project` WHERE `proj_start` != 0  or `status` = 'Completed'";
+  $sql = "SELECT * FROM `tbl_project` WHERE  `finalized_amount` = 0 AND `status` != 'Pending Calls'";
   $result = mysqli_query($con,$sql);
  ?>
   <div class="container">

@@ -21,31 +21,45 @@
   //   header('location:addsource.php');
   // }
 
-  if (isset($_POST['addaccount'])) {
+  if (isset($_POST['addaccount']) && !empty($_POST['name']) && !empty($_POST['balance']) && !empty($_POST['acnumber'])) {
     $name = htmlentities($_POST['name'],ENT_QUOTES,"UTF-8");
     $balance = htmlentities($_POST['balance'],ENT_QUOTES,"UTF-8");
     $acnumber = htmlentities($_POST['acnumber'],ENT_QUOTES,"UTF-8");
-
     $name = ucwords($name);
-    $sql = "INSERT INTO `tbl_bank`(`bank_name`, `opening_balance`, `account_number`) VALUES ('$name','$balance','$acnumber')";
+    $sql1 = "SELECT * FROM `tbl_bank` WHERE `bank_name`='$name' AND `account_number` = '$acnumber'";
+    $result1 = mysqli_query($con,$sql1);
+    if (mysqli_num_rows($result1) > 0 || !is_numeric($acnumber)|| !is_numeric($balance)) {
+      echo "<div class='alert alert-danger alert-dismissible col-md-6 col-md-offset-3 text-center' role='alert'>
+        <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
+        <strong>Warning!</strong> Name Already Exists or account number or opening balance is not a number.
+      </div>";
+    } else {
+      $sql = "INSERT INTO `tbl_bank`(`bank_name`, `opening_balance`, `account_number`) VALUES ('$name','$balance','$acnumber')";
+      $result = mysqli_query($con,$sql);
+      header('location:addaccount.php');
+    }
+  }
+  if (isset($_POST['editaccount']) && !empty($_POST['name']) && !empty($_POST['balance']) && !empty($_POST['acnumber'])) {
+    $name = htmlentities($_POST['name'],ENT_QUOTES,"UTF-8");
+    $balance = htmlentities($_POST['balance'],ENT_QUOTES,"UTF-8");
+    $acnumber = htmlentities($_POST['acnumber'],ENT_QUOTES,"UTF-8");
+    $name = ucwords($name);
+    $sql = "SELECT * FROM `tbl_bank` WHERE `bank_name`='$name' AND `bank_id` = '$edit_id'";
     $result = mysqli_query($con,$sql);
-    header('location:addaccount.php');
+    if (mysqli_num_rows($result) > 0 || !is_numeric($acnumber)|| !is_numeric($balance)) {
+      echo "<div class='alert alert-danger alert-dismissible col-md-6 col-md-offset-3 text-center' role='alert'>
+        <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
+        <strong>Warning!</strong> Name Already Exists or account number or opening balance is not a number.
+      </div>";
+    } else {
+      $sql_update = "UPDATE `tbl_bank` SET `bank_name`='$name',`opening_balance`='$balance',
+                    `account_number`='$acnumber' WHERE `bank_id` = '$edit_id'";
+
+      $result_update = mysqli_query($con,$sql_update);
+      header('location:addaccount.php');
+    }
   }
-  if (isset($_POST['editaccount'])) {
-    $name = htmlentities($_POST['name'],ENT_QUOTES,"UTF-8");
-    $balance = htmlentities($_POST['balance'],ENT_QUOTES,"UTF-8");
-    $acnumber = htmlentities($_POST['acnumber'],ENT_QUOTES,"UTF-8");
-
-    $name = ucwords($name);
-    $sql_update = "UPDATE `tbl_bank` SET `bank_name`='$name',`opening_balance`='$balance',
-                  `account_number`='$acnumber' WHERE `bank_id` = '$edit_id'";
-
-    $result_update = mysqli_query($con,$sql_update);
-    header('location:addaccount.php');
-  }
-
-
-?>
+ ?>
 
 
   <div class="container">
@@ -55,7 +69,7 @@
           <h1>Add Bank Account</h1>
         </div>
         <form  action="addaccount.php<?= ((isset($_GET['edit'])?'?edit='.$edit_id:'')) ?>" method="post">
-            <div class="form-group col-md-8">
+            <div class="form-group col-md-6">
               <label for="name" class="control-label">Bank Name:</label>
               <input type="text" class="form-control" id="name" name="name" value="<?= ((isset($_GET['edit']))? $edit_name :'');?>" placeholder="Enter Bank name">
             </div>
@@ -67,7 +81,8 @@
               <label for="acnumber" class="control-label">Account Number:</label>
               <input type="text" class="form-control" id="acnumber" name="acnumber" value="<?= ((isset($_GET['edit']))? $edit_acnumber :'');?>" placeholder="Enter Account Number">
             </div>
-            <div class="form-group col-md-6 col-md-offset-3">
+            <div class="form-group col-md-6">
+              <label>&nbsp;</label>
               <input type="submit" class="form-control btn btn-primary" id="submit" name="<?= ((isset($_GET['edit']))?'editaccount':'addaccount');?>"
                      value="<?= ((isset($_GET['edit']))?'Edit':'Add');?> Account">
             </div>

@@ -51,8 +51,8 @@
             </select>
           </div>
           <div class="form-group col-md-3">
-            <label for="contact">Project Type:</label>
-            <select class="form-control" name="type">
+            <label for="types">Project Type:</label>
+            <select class="form-control" name="types">
               <option>Select option</option>
               <?php while($row2 = mysqli_fetch_object($result2)): ?>
                 <?= $row2->type_name ?>
@@ -85,16 +85,16 @@
             </div>
             <div class="form-group col-md-6">
               <label for="followupdate">Follow Up Date:</label>
-              <div class="input-group">
-                <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-                <input type="date" class="form-control" id="followupdate" name="followupdate" min="<?= date("Y-m-d") ?>">
+              <div class="input-append date form_datetime">
+                  <input type="text" value="" name="followupdate" class="form-control" readonly>
+                  <span class="add-on"><i class="icon-th"></i></span>
               </div>
             </div>
             <div class="form-group col-md-6">
               <label for="meetingdate">Meeting Date:</label>
-              <div class="input-group">
-                <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-                <input type="date" class="form-control" id="meetingdate" name="meetingdate" min="<?= date("Y-m-d")?>">
+              <div class="input-append date form_datetime">
+                  <input type="text" value="" name="meetingdate" class="form-control" readonly>
+                  <span class="add-on"><i class="icon-th"></i></span>
               </div>
             </div>
           </div>

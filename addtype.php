@@ -16,19 +16,40 @@
     $delete_result = mysqli_query($con,$delete_sql);
     header('location:addtype.php');
   }
-  if (isset($_POST['addtype'])) {
+
+  if (isset($_POST['addtype']) && !empty($_POST['type'])) {
     $type = htmlentities($_POST['type'],ENT_QUOTES,"UTF-8");
     $type = ucwords($type);
-    $sql = "INSERT INTO `tbl_type`(`type_name`) VALUES ('$type')";
-    $result = mysqli_query($con,$sql);
-    header('location:addtype.php');
+    $sql_check = "SELECT * FROM `tbl_type` WHERE `type_name` = '$type'";
+    $result_check = mysqli_query($con,$sql_check);
+    if (mysqli_num_rows($result_check) > 0) {
+      echo "<div class='alert alert-danger alert-dismissible col-md-6 col-md-offset-3 text-center' role='alert'>
+        <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
+        <strong>Warning!</strong> Name Already Exists.
+      </div>";
+    } else {
+      $sql = "INSERT INTO `tbl_type`(`type_name`) VALUES ('$type')";
+      $result = mysqli_query($con,$sql);
+      header('location:addtype.php');
+    }
+
   }
-  if (isset($_POST['edittype'])) {
+
+  if (isset($_POST['edittype']) && !empty($_POST['type'])) {
     $type = htmlentities($_POST['type'],ENT_QUOTES,"UTF-8");
     $type = ucwords($type);
-    $sql_update = "UPDATE `tbl_type` SET `type_name`= '$type' WHERE `type_id`= '$edit_id'";
-    $result_update = mysqli_query($con,$sql_update);
-    header('location:addtype.php');
+    $sql = "SELECT * FROM `tbl_type` WHERE `type_name` = '$type' AND `type_id` != '$edit_id'";
+    $result = mysqli_query($con,$sql);
+    if (mysqli_num_rows($result) > 0 ) {
+      echo "<div class='alert alert-danger alert-dismissible col-md-6 col-md-offset-3 text-center' role='alert'>
+        <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
+        <strong>Warning!</strong> Name Already Exists.
+      </div>";
+    } else {
+      $sql_update = "UPDATE `tbl_type` SET `type_name`= '$type' WHERE `type_id`= '$edit_id'";
+      $result_update = mysqli_query($con,$sql_update);
+      header('location:addtype.php');
+    }
   }
 ?>
 <div class="container">
