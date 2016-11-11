@@ -5,7 +5,23 @@
   }
 </style>
 <?php
+  $month = $_REQUEST['month'];
+  // for getting a count and sum of all the amount for website
+  $sql_website = "SELECT SUM(`finalized_amount`), COUNT(`finalized_amount`) from `tbl_project` WHERE `project_type` = 'Website' and `start_date` LIKE '%$month%'";
+  $result_website = mysqli_query($con,$sql_website);
+  $row = mysqli_fetch_row($result_website);
+  $actual_website_total = $row[0];
+  $actual_website_achived = $row[1];
 
+  // for getting a count and sum of all the amount for website
+  $sql_mobile = "SELECT SUM(`finalized_amount`), COUNT(`finalized_amount`) from `tbl_project` WHERE `project_type` = 'Website' and `start_date` LIKE '%$month%'";
+  $result_mobile = mysqli_query($con,$sql_mobile);
+  $row = mysqli_fetch_row($result_mobile);
+  $actual_mobile_total = $row[0];
+  $actual_mobile_achived = $row[1];
+  // for getting the total of both mobile and website
+  $achived_overall_total =   $actual_mobile_total + $actual_website_total;
+  
  ?>
 <div class="container">
   <div class="row">
@@ -21,7 +37,7 @@
     </form>
     <div class="col-md-10 col-md-offset-1">
       <div class="page-header">
-        <h1>Projections for the month of <?= date('F') ?></h1>
+        <h1>Projections</h1>
       </div>
       <div>
         <!-- Tab menu -->
@@ -44,13 +60,28 @@
                   <label for="web" class="control-label">Website:</label>
                   <input type="text" class="form-control" id="web" name="web" placeholder="Enter the Number of Web Projects">
                 </div>
-                <div class="form-group col-md-2">
+                <div class="form-group col-md-4">
                   <label for="">&nbsp;</label>
                   <input type="submit" class="form-control btn btn-primary" id="submit" name="submit" value="Calculate">
                 </div>
+                <?php
+                    if (isset($_edit['id'])) {
+                      # code...
+                    } else {
+                      # code...
+                    }
+                 ?>
                 <div class="form-group col-md-2">
+                  <label for="" class="control-label">Mobile:</label>
+                  <label class="form-control text-center" value=""></label>
+                </div>
+                <div class="form-group col-md-2">
+                  <label for="" class="control-label">Websites:</label>
+                  <label class="form-control text-center" value=""></label>
+                </div>
+                <div class="form-group col-md-4">
                   <label for="">&nbsp;</label>
-                  <input type="submit" class="form-control btn btn-success" id="edit" name="edit" value="Update Projection">
+                  <a href="<?= $_SERVER['PHP_SELF'] ?>" class="btn btn-success form-control">Update Projection</a>
                 </div>
               </form>
             </div>
