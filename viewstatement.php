@@ -10,7 +10,7 @@
   $sql_credit_sum = "SELECT SUM(`amount`) FROM `tbl_statement` WHERE `bank_id` = '$id' AND `statement_type` = 'incoming'";
   $result_credit_sum = mysqli_query($con,$sql_credit_sum);
   $credit_total = mysqli_fetch_array($result_credit_sum);
-  
+
   $sql_debit_sum = "SELECT SUM(`amount`) FROM `tbl_statement` WHERE `bank_id` = '$id' AND `statement_type` = 'outgoing'";
   $result_debit_sum = mysqli_query($con,$sql_debit_sum);
   $debit_total = mysqli_fetch_array($result_debit_sum);
@@ -35,14 +35,14 @@
                   <tr>
                     <td><?= $row -> statement_date ?></td>
                     <td><?= $row -> statement_from ?></td>
-                    <td><?= (($row -> statement_type == 'outgoing'))? $row-> amount :'' ?></td>
-                    <td><?= (($row -> statement_type == 'incoming'))? $row-> amount :'' ?></td>
+                    <td><?= (($row -> statement_type == 'outgoing'))? number_format($row-> amount) :'' ?></td>
+                    <td><?= (($row -> statement_type == 'incoming'))? number_format($row-> amount) :'' ?></td>
                   </tr>
                 <?php endwhile; ?>
                 <tr>
                   <td colspan="2">Total</td>
-                  <td><?= $debit_total[0] ?></td>
-                  <td><?= $credit_total[0] ?></td>
+                  <td><?= number_format($debit_total[0]) ?></td>
+                  <td><?= number_format($credit_total[0]) ?></td>
                 </tr>
               </tbody>
             </table>
