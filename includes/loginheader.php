@@ -1,7 +1,4 @@
-<?php include 'core/init.php'; ?>
-<?php if (!isset($_SESSION['admin'])) {
-  header('Location:login.php');
-} ?>
+<?php include 'core/init.php'; session_start();?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

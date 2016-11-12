@@ -25,6 +25,11 @@
       $sql1 = "INSERT INTO `tbl_payment_outgoing`(`from_bank_id`, `from_bank`, `from_account`, `outgoing_amt`, `expense_type`, `outgoing_date`, `additional_comments`)
                VALUES ('$bankdetails[0]','$bankdetails[1]','$bankdetails[2]','$amount','$expensetype','$paidon','$comments')";
       $result1 = mysqli_query($con,$sql1);
+
+      $sql2 = "INSERT INTO `tbl_statement`(`statement_date`, `bank_id`, `account_number`, `statement_from`, `amount`, `statement_type`)
+              VALUES ('$paidon','$bankdetails[0]','$bankdetails[2]','$expensetype','$amount','outgoing')";
+
+      $result1 = mysqli_query($con,$sql2);
     }
   }
 

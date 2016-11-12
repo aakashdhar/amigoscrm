@@ -95,7 +95,7 @@
             <th>Bank Name</th>
             <th>Opening Balance</th>
             <th>Account Number</th>
-            <th>Action</th>
+            <th width=25%>Action</th>
           </thead>
           <tbody>
             <?php
@@ -109,7 +109,7 @@
                 <td><?= $row -> account_number ?></td>
                 <td>
                   <a href="addaccount.php?edit=<?= $row -> bank_id ;?>" class="btn btn-success"><i class="fa fa-pencil"></i>  Edit</a>
-                  <!-- <a href=""><i class="fa fa-trash"></i>  Delete</a> -->
+                  <a href="viewstatement.php?id=<?= $row -> bank_id ;?>" class="btn btn-warning"><i class="fa fa-bank"></i>  View Statement</a>
                 </td>
               </tr>
             <?php endwhile; ?>

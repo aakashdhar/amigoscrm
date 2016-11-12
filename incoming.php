@@ -29,6 +29,10 @@
 
         $sql4 =  "UPDATE `tbl_bank` SET `opening_balance`= '$new_opening_balance' WHERE `bank_id` = $bankdetail[0]";
         $result4 = mysqli_query($con,$sql4);
+
+        $sql5 = "INSERT INTO `tbl_statement`(`statement_date`, `bank_id`, `account_number`, `statement_from`, `amount`, `statement_type`)
+                VALUES ('$paiddate','$bankdetail[0]','$bankdetail[2]','$projdetail[0]','$amount','incoming')";
+        $result5 = mysqli_query($con,$sql5);
       }
   }
 
@@ -73,7 +77,7 @@
             <select class="form-control" id="projectname" name="bankname">
               <option value="">Select Account</option>
               <?php while($row1 = mysqli_fetch_object($result1)): ?>
-                <option value="<?=$row1 -> bank_id?>#<?=$row1 -> opening_balance?>"><?= $row1-> bank_name ?> | <?= $row1-> account_number ?></option>
+                <option value="<?=$row1 -> bank_id?>#<?=$row1 -> opening_balance?>#<?= $row1 -> account_number?>"><?= $row1-> bank_name ?> | <?= $row1-> account_number ?></option>
               <?php endwhile; ?>
             </select>
           </div>

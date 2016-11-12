@@ -10,7 +10,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Amigos</a>
+      <a class="navbar-brand" href="index.php">Amigos</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -20,7 +20,7 @@
         <li><a href="modifyproject.php">Modify Project</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="projection.php?month=<?= date('m') ?>"><i class="fa fa-product-hunt"></i>  Projection</a></li>
+        <li><a href="projection.php?month=<?= date('Y-m') ?>"><i class="fa fa-product-hunt"></i>  Projection</a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-flag-o" aria-hidden="true"></i>  Follow Up <span class="caret"></span></a>
           <ul class="dropdown-menu">
@@ -43,6 +43,7 @@
             <li><a href="addaccount.php">Add Bank Account</a></li>
             <li><a href="addexpensetype.php">Add Expense Type</a></li>
             <li><a href="addtype.php">Add Type</a></li>
+            <li><a href="logout.php">Logout</a></li>
           </ul>
         </li>
       </ul>

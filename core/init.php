@@ -5,8 +5,8 @@
     echo "There is a problem concecting to the database We will try to fix it ASAP.";
     die();
   }
-
+  date_default_timezone_set('Asia/Kolkata');
   error_reporting(0);
-
-  require_once 'helpers/helpers.php';
+  session_start();
+  
  ?>
