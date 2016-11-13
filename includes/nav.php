@@ -19,6 +19,14 @@
         <li><a href="addproject.php">Add Project</a></li>
         <li><a href="modifyproject.php">Modify Project</a></li>
       </ul>
+      <form class="navbar-form navbar-left" action="search.php" role="search">
+        <div class="input-group">
+          <input type="text" class="form-control" name="search-query" placeholder="Search for...">
+           <span class="input-group-btn">
+             <input type="submit" class="btn btn-primary" name="search" value="Search">
+           </span>
+         </div>
+       </form>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="projection.php?month=<?= date('Y-m') ?>"><i class="fa fa-product-hunt"></i>  Projection</a></li>
         <li class="dropdown">
