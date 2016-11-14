@@ -88,7 +88,7 @@
             <td>
               <div class="btn-group">
                 <a href="addtype.php?edit=<?= $row -> type_id ;?>" class="btn btn-success"><i class="fa fa-pencil"></i>  Edit</a>
-                <a href="addtype.php?delete=<?= $row -> type_id ;?>" class="btn btn-danger"><i class="fa fa-trash"></i>  Delete</a>
+                <a href="addtype.php?delete=<?= $row -> type_id ;?>" class="btn btn-danger" onclick="return confirm('Are you sure?')"><i class="fa fa-trash"></i>  Delete</a>
               </div>
             </td>
           </tr>

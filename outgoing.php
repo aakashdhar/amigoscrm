@@ -60,7 +60,7 @@
           </div>
           <div class="form-group col-md-4">
             <label for="amount">Enter Amount</label>
-            <input type="text" class="form-control" id="amount" name="amount" placeholder="Enter Amount" required="true">
+            <input type="text" class="form-control" id="amount" name="amount" placeholder="Enter Amount" required="true" onkeypress="return isOnlyNumberKey(event)">
           </div>
           <div class="form-group col-md-6">
             <label for="">Select Expense Type:</label>

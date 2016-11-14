@@ -93,7 +93,7 @@
             <td>
               <div class="btn-group">
                 <a href="addexpensetype.php?edit=<?= $row -> expense_id ;?>" class="btn btn-success"><i class="fa fa-pencil"></i>  Edit</a>
-                <a href="addexpensetype.php?delete=<?= $row -> expense_id ;?>" class="btn btn-danger"><i class="fa fa-trash"></i>  Delete</a>
+                <a href="addexpensetype.php?delete=<?= $row -> expense_id ;?>" class="btn btn-danger" onclick="return confirm('Are you sure?')"><i class="fa fa-trash"></i>  Delete</a>
               </div>
             </td>
           </tr>

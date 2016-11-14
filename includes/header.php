@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="css/bootstrap.css">
   <link rel="stylesheet" href="css/bootstrap-datetimepicker.css">
   <link rel="stylesheet" href="css/font-awesome.css">
+  <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/themes/base/minified/jquery-ui.min.css">
   <link rel="stylesheet" href="css/style.css">
   <title>Amigos | CRM</title>
 </head>

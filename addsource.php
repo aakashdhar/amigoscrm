@@ -98,7 +98,7 @@
             <td>
               <div class="btn-group">
                 <a href="addsource.php?edit=<?= $row -> source_id ;?>" class="btn btn-success"><i class="fa fa-pencil"></i>  Edit</a>
-                <a href="addsource.php?delete=<?= $row -> source_id ;?>" class="btn btn-danger" onclick="confirm(Do you Want to delete this record)"><i class="fa fa-trash"></i>  Delete</a>
+                <a href="addsource.php?delete=<?= $row -> source_id ;?>" class="btn btn-danger" onclick="return confirm('Are you sure?')"><i class="fa fa-pencil"></i>  Delete</a>
               </div>
             </td>
           </tr>

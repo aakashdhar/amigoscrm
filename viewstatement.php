@@ -35,8 +35,8 @@
                   <tr>
                     <td><?= $row -> statement_date ?></td>
                     <td><?= $row -> statement_from ?></td>
-                    <td><?= (($row -> statement_type == 'outgoing'))? number_format($row-> amount) :'' ?></td>
                     <td><?= (($row -> statement_type == 'incoming'))? number_format($row-> amount) :'' ?></td>
+                    <td><?= (($row -> statement_type == 'outgoing'))? number_format($row-> amount) :'' ?></td>
                   </tr>
                 <?php endwhile; ?>
                 <tr>

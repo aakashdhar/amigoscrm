@@ -22,11 +22,6 @@
     $outsourced = 'outsourced to none';
     $outsourcedamt = 0;
   }
-  if () {
-
-  } else {
-    
-  }
 
 
   $sql = "INSERT INTO `tbl_project`(`project_name`, `client_name`, `contact_number`, `source`, `status`, `quote`, `client_expection`,

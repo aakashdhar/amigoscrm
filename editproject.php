@@ -28,7 +28,7 @@
           </div>
           <div class="form-group col-md-6">
             <label for="name">Project Name:</label>
-            <input type="text" class="form-control" id="name" name="name" value="<?= $row_edit -> project_name ?>" placeholder="Enter the Project Name">
+            <input type="text" class="form-control auto" id="name" name="name" value="<?= $row_edit -> project_name ?>" placeholder="Enter the Project Name">
           </div>
           <div class="form-group col-md-6">
             <label for="client">Client Name</label>
@@ -73,7 +73,7 @@
             <div class="input-group">
               <div class="input-group-addon"><i class="fa fa-rupee"></i></div>
                 <input type="text" class="form-control" id="quote" name="quote" placeholder="Enter quoted Amount"
-                value="<?= (($row_edit -> quote == 0)? '' : $row_edit -> quote )?>">
+                value="<?= (($row_edit -> quote == 0)? '' : $row_edit -> quote )?>" onkeypress="return isOnlyNumberKey(event)">
             </div>
           </div>
           <div class="form-group col-md-2">
@@ -81,7 +81,7 @@
             <div class="input-group">
               <div class="input-group-addon"><i class="fa fa-rupee"></i></div>
                 <input type="text" class="form-control" id="paid" name="paid" placeholder="Enter Expected Amount"
-                value="<?= (($row_edit -> client_expection == 0)? '' : $row_edit -> client_expection )?>">
+                value="<?= (($row_edit -> client_expection == 0)? '' : $row_edit -> client_expection )?>" onkeypress="return isOnlyNumberKey(event)">
             </div>
           </div>
           <div class="form-group col-md-2">
@@ -89,7 +89,7 @@
             <div class="input-group">
               <div class="input-group-addon"><i class="fa fa-rupee"></i></div>
                 <input type="text" class="form-control" id="finalpaid" name="finalpaid" placeholder="Enter Expected Amount"
-                value="<?= (($row_edit -> finalized_amount == 0)? '' : $row_edit -> finalized_amount )?>">
+                value="<?= (($row_edit -> finalized_amount == 0)? '' : $row_edit -> finalized_amount )?>" onkeypress="return isOnlyNumberKey(event)">
             </div>
           </div>
           <div class="form-group col-md-2">
@@ -97,7 +97,7 @@
             <div class="input-group">
               <div class="input-group-addon"><i class="fa fa-rupee"></i></div>
                 <input type="text" class="form-control" id="amtpaid" name="amtpaid" placeholder="Enter Paid Amount"
-                value="<?= $row_edit -> amt_paid ?>" disabled="true">
+                value="<?= (($row_edit -> amt_paid == 0)? '' : $row_edit -> amt_paid )?>" disabled="true">
             </div>
           </div>
           <div class="form-group col-md-2">
@@ -105,7 +105,7 @@
             <div class="input-group">
               <div class="input-group-addon"><i class="fa fa-rupee"></i></div>
                 <input type="text" class="form-control" id="amtblnc" name="amtblnc" placeholder="Enter Due Amount"
-                value="<?= $row_edit -> finalized_amount - $row_edit -> amt_paid ?>" disabled="true">
+                value="<?= (($row_edit -> amt_balance == 0)? '' : $row_edit -> amt_balance )?>" disabled="true">
             </div>
           </div>
           <div class="form-group col-md-2">
@@ -113,105 +113,40 @@
             <div class="input-group">
               <div class="input-group-addon"><i class="fa fa-rupee"></i></div>
                 <input type="text" class="form-control" id="amtdue" name="amtdue" placeholder="Enter Due Amount"
-                value="<?= (($row_edit -> amt_due == 0)? '' : $row_edit -> amt_due )?>">
+                value="<?= (($row_edit -> amt_due == 0)? '' : $row_edit -> amt_due )?>" onkeypress="return isOnlyNumberKey(event)">
             </div>
           </div>
           <div class="page-header">
             <h4 style="color : #f1c40f;">Dates</h4>
           </div>
-          <!-- checking to validate that the followup is mandatorry  -->
-          <?php if($row_edit -> status == 'Followup'): ?>
-            <div class="form-group col-md-3">
-              <label for="followupdate">Follow Up Date:</label>
-              <div class="input-append date form_datetime">
-                  <input type="text" value="<?= $row_edit -> follow_up_date ?>" name="followupdate" class="form-control" readonly required>
-                  <span class="add-on"><i class="icon-th"></i></span>
-              </div>
+          <div class="form-group col-md-3">
+            <label for="followupdate">Follow Up Date:</label>
+            <div class="input-group">
+              <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+              <input type="date" class="form-control" id="followupdate" id="followupdate" name="followupdate" value="<?= $row_edit -> follow_up_date ?>">
             </div>
-            <?php else: ?>
-              <div class="form-group col-md-3">
-                <label for="followupdate">Follow Up Date:</label>
-                <div class="input-append date form_datetime">
-                    <input type="text" value="<?= $row_edit -> follow_up_date ?>" name="followupdate" class="form-control" readonly>
-                    <span class="add-on"><i class="icon-th"></i></span>
-                </div>
-              </div>
-          <?php endif; ?>
-          <!-- end checking to validate that the followup is mandatorry  -->
-          <!-- checking to validate that the tomeet is mandatorry -->
-          <?php if ($row_edit -> status == 'To Meet'): ?>
-            <div class="form-group col-md-3">
-              <label for="meetingdate">Meeting Date:</label>
-              <div class="input-append date form_datetime">
-                  <input type="text" value="<?= $row_edit -> meeting_date ?>" name="meetingdate" class="form-control" readonly required>
-                  <span class="add-on"><i class="icon-th"></i></span>
-              </div>
+          </div>
+          <div class="form-group col-md-3">
+            <label for="followupdate">Meeting Date:</label>
+            <div class="input-group">
+              <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+              <input type="date" class="form-control" id="meetingdate" name="meetingdate" value="<?= $row_edit ->  meeting_date?>">
             </div>
-            <?php else: ?>
-              <div class="form-group col-md-3">
-                <label for="meetingdate">Meeting Date:</label>
-                <div class="input-append date form_datetime">
-                    <input type="text" value="<?= $row_edit -> meeting_date ?>" name="meetingdate" class="form-control" readonly>
-                    <span class="add-on"><i class="icon-th"></i></span>
-                </div>
-              </div>
-          <?php endif; ?>
-          <!-- checking to validate that the tomeet is mandatorry -->
-
-
-            <?php if ($row_edit -> status == 'In Progress' || $row_edit -> status == 'Awaiting Payment' || $row_edit -> status == 'Awaiting Feedback'): ?>
-              <div class="form-group col-md-3">
-                <label for="meetingdate">Start Date:</label>
-                <div class="input-group">
-                  <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-                  <input type="date" class="form-control" id="startdate" name="startdate"
-                    value="<?= (($row_edit -> start_date == '0000-00-00')? '' : $row_edit -> start_date) ?>" required="true">
-                </div>
-              </div>
-              <div class="form-group col-md-3">
-                <label for="meetingdate">Deadline:</label>
-                <div class="input-group">
-                  <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-                  <input type="date" class="form-control" id="deadline" name="deadline"
-                    value="<?= (($row_edit -> deadline == '0000-00-00')? '' : $row_edit -> deadline) ?>" min="<?= date("Y-m-d")?>" required="true">
-                </div>
-              </div>
-            <?php elseif($row_edit -> status == 'Yet To Start'): ?>
-              <div class="form-group col-md-3">
-                <label for="meetingdate">Start Date:</label>
-                <div class="input-group">
-                  <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-                  <input type="date" class="form-control" id="startdate" name="startdate"
-                    value="<?= (($row_edit -> start_date == '0000-00-00')? '' : $row_edit -> start_date) ?>" required="true">
-                </div>
-              </div>
-              <div class="form-group col-md-3">
-                <label for="meetingdate">Deadline:</label>
-                <div class="input-group">
-                  <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-                  <input type="date" class="form-control" id="deadline" name="deadline"
-                    value="<?= (($row_edit -> deadline == '0000-00-00')? '' : $row_edit -> deadline) ?>" min="<?= date("Y-m-d")?>">
-                </div>
-              </div>
-            <?php else: ?>
-              <div class="form-group col-md-3">
-                <label for="meetingdate">Start Date:</label>
-                <div class="input-group">
-                  <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-                  <input type="date" class="form-control" id="startdate" name="startdate"
-                    value="<?= (($row_edit -> start_date == '0000-00-00')? '' : $row_edit -> start_date) ?>">
-                </div>
-              </div>
-              <div class="form-group col-md-3">
-                <label for="meetingdate">Deadline:</label>
-                <div class="input-group">
-                  <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-                  <input type="date" class="form-control" id="deadline" name="deadline"
-                    value="<?= (($row_edit -> deadline == '0000-00-00')? '' : $row_edit -> deadline) ?>" min="<?= date("Y-m-d")?>">
-                </div>
-              </div>
-            <?php endif; ?>
-
+          </div>
+          <div class="form-group col-md-3">
+            <label for="meetingdate">Start Date:</label>
+            <div class="input-group">
+              <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+              <input type="date" class="form-control" id="startdate" name="startdate" value="<?= $row_edit -> start_date ?>" min="<?= date("Y-m-d")?>">
+            </div>
+          </div>
+          <div class="form-group col-md-3">
+            <label for="meetingdate">Deadline:</label>
+            <div class="input-group">
+              <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+              <input type="date" class="form-control" id="deadline" name="deadline" value="<?= $row_edit -> deadline ?>" min="<?= date("Y-m-d")?>">
+            </div>
+          </div>
           <div class="page-header">
             <br><br>
             <h4 style="color : #f1c40f;">Additional Details</h4>

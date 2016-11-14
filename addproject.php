@@ -8,6 +8,7 @@
 
   $sql2 = "SELECT * FROM `tbl_type`";
   $result2 = mysqli_query($con,$sql2);
+
  ?>
 <div class="container">
   <div class="row">
@@ -22,11 +23,11 @@
           </div>
           <div class="form-group col-md-6">
             <label for="name">Project Name:</label><span id="result"></span>
-            <input type="text" class="form-control" id="name" name="name" placeholder="Enter the Project Name">
+            <input type="text" class="form-control auto" id="name" name="name" placeholder="Enter the Project Name" required="true">
           </div>
           <div class="form-group col-md-6">
             <label for="client">Client Name</label>
-            <input type="text" class="form-control" id="client" name="client" placeholder="Enter the Client Name">
+            <input type="text" class="form-control" id="client" name="client" placeholder="Enter the Client Name" required="true">
           </div>
           <div class="form-group col-md-3">
             <label for="contact">Contact Number:</label>
@@ -68,7 +69,7 @@
               <label for="quote">Quote:</label>
               <div class="input-group">
                 <div class="input-group-addon"><i class="fa fa-rupee"></i></div>
-                  <input type="text" class="form-control" id="quote" name="quote" placeholder="Enter quoted Amount">
+                  <input type="text" class="form-control" id="quote" name="quote" placeholder="Enter quoted Amount" required>
               </div>
             </div>
             <div class="form-group col-md-6">
@@ -85,16 +86,16 @@
             </div>
             <div class="form-group col-md-6">
               <label for="followupdate">Follow Up Date:</label>
-              <div class="input-append date form_datetime">
-                  <input type="text" value="" name="followupdate" class="form-control" readonly>
-                  <span class="add-on"><i class="icon-th"></i></span>
+              <div class="input-group">
+                <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                <input type="date" class="form-control" name="followupdate" id="followupdate">
               </div>
             </div>
             <div class="form-group col-md-6">
               <label for="meetingdate">Meeting Date:</label>
-              <div class="input-append date form_datetime">
-                  <input type="text" value="" name="meetingdate" class="form-control" readonly>
-                  <span class="add-on"><i class="icon-th"></i></span>
+              <div class="input-group">
+                <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                <input type="date" class="form-control" name="meetingdate" id="meetingdate">
               </div>
             </div>
           </div>

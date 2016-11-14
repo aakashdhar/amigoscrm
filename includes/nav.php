@@ -19,9 +19,13 @@
         <li><a href="addproject.php">Add Project</a></li>
         <li><a href="modifyproject.php">Modify Project</a></li>
       </ul>
-      <form class="navbar-form navbar-left" action="search.php" role="search">
+      <form class="navbar-form navbar-left" action="search.php">
         <div class="input-group">
-          <input type="text" class="form-control" name="search-query" placeholder="Search for...">
+          <div class="wrapper">
+            <div class="ui-widget">
+              <input type="text" class="form-control auto" id="search-query" name="search-query" placeholder="Search for...">
+            </div>
+          </div>
            <span class="input-group-btn">
              <input type="submit" class="btn btn-primary" name="search" value="Search">
            </span>

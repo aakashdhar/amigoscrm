@@ -100,7 +100,8 @@
       $sql_update = "UPDATE `tbl_projection` SET `numb_mobile_proj`='$numb_mobile',`numb_web_proj`='$numb_web',`mobile_total`='$total_from_mobile_proj',
                     `web_total`='$total_from_web_proj',`overall_total`='$final_total' WHERE `projection_id`='$id'";
       $result_update = mysqli_query($con,$sql_update);
-        header('Location: projection.php?month='.$date);
+      $date_redirect = date('Y-m');
+        echo "<script> location.href='projection.php?month='+'$date_redirect' </script>";
 
     }
   }
@@ -142,11 +143,11 @@
                 <form action="projection.php" method="post">
                   <div class="form-group col-md-4">
                     <label for="mobile" class="control-label">Mobile:</label>
-                    <input type="text" class="form-control" id="mobile" name="mobile" value="<?= $row_fill -> numb_mobile_proj ?>" placeholder="Enter the number of Mobile Projects">
+                    <input type="text" class="form-control" id="mobile" name="mobile" value="<?= $row_fill -> numb_mobile_proj ?>" placeholder="Enter the number of Mobile Projects" onkeypress="return isOnlyNumberKey(event)">
                   </div>
                   <div class="form-group col-md-4">
                     <label for="web" class="control-label">Website:</label>
-                    <input type="text" class="form-control" id="web" name="web" value="<?= $row_fill -> numb_web_proj ?>" placeholder="Enter the Number of Web Projects">
+                    <input type="text" class="form-control" id="web" name="web" value="<?= $row_fill -> numb_web_proj ?>" placeholder="Enter the Number of Web Projects" onkeypress="return isOnlyNumberKey(event)">
                   </div>
                   <div class="form-group col-md-4">
                     <label for="">&nbsp;</label>

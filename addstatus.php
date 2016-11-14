@@ -94,7 +94,7 @@
             <td>
               <div class="btn-group">
                 <a href="addstatus.php?edit=<?= $row -> status_id ;?>" class="btn btn-success"><i class="fa fa-pencil"></i>  Edit</a>
-                <a href="addstatus.php?delete=<?= $row -> status_id ;?>" class="btn btn-danger"><i class="fa fa-trash"></i>  Delete</a>
+                <a href="addstatus.php?delete=<?= $row -> status_id ;?>" class="btn btn-danger" onclick="return confirm('Are you sure?')"><i class="fa fa-trash"></i>  Delete</a>
               </div>
             </td>
           </tr>

@@ -65,8 +65,8 @@
                    <i class="fa fa-arrows-v fa-5x"></i>
                </div>
                <div class="col-xs-9 text-right">
-                   <div class="huge"><?= count($count_array) ?> comments</div>
-                   <div>with the word pipeline</div>
+                   <div class="huge"><?= count($count_array) ?> Projects</div>
+                   <div>in pipeline</div>
                </div>
              </div>
            </div>
@@ -127,7 +127,7 @@
       <!-- targets end -->
       <!-- Achive starts -->
       <?php
-        $month =  date('F Y');
+        $month =  date('Y-m');
         $sql4 = "SELECT `overall_total` from `tbl_projection` WHERE `projection_time` like '$month'";
         $resul_set = mysqli_query($con,$sql4);
         $rowss = mysqli_fetch_row($resul_set);
@@ -141,7 +141,7 @@
               </div>
               <div class="col-xs-9 text-right">
                   <div class="huge"><?= number_format($rowss[0]) ?>  <i class="fa fa-rupee"></i></div>
-                  <div>Target Achived</div>
+                  <div>Target for the month</div>
               </div>
             </div>
           </div>

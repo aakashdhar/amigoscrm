@@ -71,15 +71,15 @@
         <form  action="addaccount.php<?= ((isset($_GET['edit'])?'?edit='.$edit_id:'')) ?>" method="post">
             <div class="form-group col-md-6">
               <label for="name" class="control-label">Bank Name:</label>
-              <input type="text" class="form-control" id="name" name="name" value="<?= ((isset($_GET['edit']))? $edit_name :'');?>" placeholder="Enter Bank name">
+              <input type="text" class="form-control" id="name" name="name" value="<?= ((isset($_GET['edit']))? $edit_name :'');?>" placeholder="Enter Bank name" required>
             </div>
             <div class="form-group col-md-6">
               <label for="balance" class="control-label">Opening Balance:</label>
-              <input type="text" class="form-control" id="balance" name="balance" value="<?= ((isset($_GET['edit']))? $edit_balance :'');?>" placeholder="Enter Opening Balance">
+              <input type="text" class="form-control" id="balance" name="balance" value="<?= ((isset($_GET['edit']))? $edit_balance :'');?>" placeholder="Enter Opening Balance" onkeypress="return isOnlyNumberKey(event)" required>
             </div>
             <div class="form-group col-md-6">
               <label for="acnumber" class="control-label">Account Number:</label>
-              <input type="text" class="form-control" id="acnumber" name="acnumber" value="<?= ((isset($_GET['edit']))? $edit_acnumber :'');?>" placeholder="Enter Account Number">
+              <input type="text" class="form-control" id="acnumber" name="acnumber" value="<?= ((isset($_GET['edit']))? $edit_acnumber :'');?>" placeholder="Enter Account Number" required>
             </div>
             <div class="form-group col-md-6">
               <label>&nbsp;</label>

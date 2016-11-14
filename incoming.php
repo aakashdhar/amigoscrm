@@ -38,13 +38,24 @@
 
 
 ?>
+<script>
+  function validateForm() {
+      var x = document.forms["myForm"]["amount"].value;
+      if (x == null || x == "") {
+          alert("Amount to be filled out");
+          document.getElementById("amount").focus();
+          return false;
+      }
+    }
+</script>
+
   <div class="container">
     <div class="row">
       <div class="col-md-10 col-md-offset-1">
         <div class="page-header">
           <h1>Incoming Payments</h1>
         </div>
-        <form action="incoming.php" method="post" name="myForm"onsubmit="return checkInp()">
+        <form action="incoming.php" method="post" name="myForm"onsubmit="return validateForm()">
           <?php
             $sql = "SELECT `project_id`,`project_name` FROM `tbl_project`";
             $result = mysqli_query($con,$sql);
@@ -63,13 +74,13 @@
           </div>
           <div class="form-group col-md-6">
             <label for="amount" class="control-label">Amount:</label>
-            <input type="text" class="form-control" id="amount" name="amount" placeholder="Enter Amount">
+            <input type="text" class="form-control" id="amount" name="amount" placeholder="Enter Amount" onkeypress="return isOnlyNumberKey(event)">
           </div>
           <div class="form-group col-md-6">
             <label for="meetingdate">Paid Date:</label>
             <div class="input-group">
               <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-              <input type="date" class="form-control" id="meetingdate" name="paiddate" min="<?= date("Y-m-d")?>">
+              <input type="date" class="form-control" id="meetingdate" name="paiddate">
             </div>
           </div>
           <div class="form-group col-md-6">
